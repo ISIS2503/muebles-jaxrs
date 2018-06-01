@@ -36,7 +36,7 @@ public class MuebleService {
    
     @GET
     public Response getAllMuebles(@QueryParam("page") Integer page, @QueryParam("maxRecords") Integer maxRecords) {
-        return mueblesLogic.getAllPage(page,maxRecords);
+        return mueblesLogic.getAllPage(page, maxRecords);
     }
     
     @POST

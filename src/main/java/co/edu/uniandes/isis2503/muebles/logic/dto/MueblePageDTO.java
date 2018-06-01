@@ -8,19 +8,10 @@ import java.util.List;
  */
 public class MueblePageDTO {
 
-    private Long totalRecords;
     private List<MuebleDTO> muebles;
 
     public MueblePageDTO() {
 
-    }
-
-    public Long getTotalRecords() {
-        return totalRecords;
-    }
-
-    public void setTotalRecords(Long totalRecords) {
-        this.totalRecords = totalRecords;
     }
 
     public List<MuebleDTO> getMuebles() {

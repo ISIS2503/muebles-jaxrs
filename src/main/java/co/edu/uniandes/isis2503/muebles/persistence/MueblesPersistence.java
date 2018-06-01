@@ -26,7 +26,6 @@ public class MueblesPersistence {
     public MueblesPersistence() {
         emf = Persistence.createEntityManagerFactory("Muebles");
     }
-
     
     public Response getAllPage(Integer page, Integer maxRecords) {
  
@@ -34,21 +33,15 @@ public class MueblesPersistence {
         entityManager = emf.createEntityManager();
         int status = 200;
         try{
-            entityManager.getTransaction().begin();
-            Query count = entityManager.createQuery("select count(u) from MuebleEntity u");
-            Long regCount = 0L;
-            regCount = Long.parseLong(count.getSingleResult().toString());
+            // entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select u from MuebleEntity u");
             if(page != null && maxRecords != null){
                 query.setFirstResult((page-1)*maxRecords);
                 query.setMaxResults(maxRecords);
             }
             muebles = new MueblePageDTO();
-            muebles.setTotalRecords(regCount);
             muebles.setMuebles(query.getResultList());
-            entityManager.getTransaction().commit();
- 
- 
+            // entityManager.getTransaction().commit(); 
         }catch(Exception e){
             if (entityManager.isOpen());
             entityManager.close();
@@ -57,7 +50,7 @@ public class MueblesPersistence {
             if (entityManager.isOpen());
             entityManager.close();
         }
-        return Response.status(status).header("Access-Control-Allow-Origin", "*").entity(muebles).build();
+        return Response.status(status).header("Access-Control-Allow-Origin", "*").entity(muebles.getMuebles()).build();
     }
 
     public Response createCompetitor(MuebleEntity mueble) {
